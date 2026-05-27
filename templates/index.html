@@ -2,195 +2,608 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>DevOps Assessment Platform</title>
+<title>DevOps Master Assessment</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body {
-    font-family: Arial, sans-serif;
-    background: #0f172a;
-    color: #e2e8f0;
-    margin: 0;
-}
-
-header {
-    background: #1e293b;
-    padding: 15px;
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #0f2027, #2c5364);
+  color: white;
 }
 
 .container {
-    display: flex;
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
 }
 
-/* Sidebar */
-.sidebar {
-    width: 250px;
-    background: #020617;
-    padding: 20px;
-    height: 100vh;
+h1 {
+  text-align: center;
 }
 
-.sidebar button {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
-    background: #1e293b;
-    border: none;
-    color: white;
-    cursor: pointer;
-}
-
-.sidebar button:hover {
-    background: #3b82f6;
-}
-
-/* Content */
-.content {
-    flex: 1;
-    padding: 20px;
-}
-
-.question-card {
-    background: #1e293b;
-    padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 10px;
+.card {
+  background: rgba(255,255,255,0.08);
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
 }
 
 .option {
-    margin: 8px 0;
+  display: block;
+  margin: 6px 0;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-button.submit-btn {
-    background: #22c55e;
-    border: none;
-    padding: 12px 20px;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
+.option:hover { background: rgba(255,255,255,0.1); }
+
+.correct { background: #2ecc71; }
+.wrong { background: #e74c3c; }
+
+button {
+  padding: 15px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background: #27ae60;
+  color: white;
+  font-size: 18px;
 }
 
-.progress {
-    margin-bottom: 15px;
+.explanation {
+  display:none;
+  margin-top:10px;
+  background:#222;
+  padding:10px;
+  border-left:4px solid #00c3ff;
 }
-
 </style>
-
-<script>
-function showChapter(chapter) {
-    let sections = document.querySelectorAll(".chapter");
-    sections.forEach(sec => sec.style.display = "none");
-
-    document.getElementById(chapter).style.display = "block";
-}
-</script>
-
 </head>
 
 <body>
 
-<header>🚀 DevOps Assessment Platform</header>
-
 <div class="container">
+<h1> 🤖 DevOps Master Assessment 🤖</h1>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h3>Chapters</h3>
-        <button onclick="showChapter('devops')">DevOps</button>
-        <button onclick="showChapter('aws')">AWS</button>
-        <button onclick="showChapter('docker')">Docker</button>
-        <button onclick="showChapter('k8s')">Kubernetes</button>
-    </div>
+<form id="quiz"></form>
 
-    <!-- Content -->
-    <div class="content">
+<button onclick="submitQuiz()">Submit</button>
 
-        <form method="POST">
-
-        <!-- DevOps -->
-        <div id="devops" class="chapter">
-            <h2>DevOps</h2>
-
-            <div class="question-card">
-                <p>1. What is DevOps?</p>
-                <div class="option"><input type="radio" name="q1" value="Culture"> Culture</div>
-                <div class="option"><input type="radio" name="q1" value="Tool"> Tool</div>
-                <div class="option"><input type="radio" name="q1" value="Language"> Language</div>
-            </div>
-
-            <div class="question-card">
-                <p>2. CI/CD stands for?</p>
-                <div class="option"><input type="radio" name="q2" value="Correct"> Continuous Integration & Continuous Deployment</div>
-                <div class="option"><input type="radio" name="q2" value="Wrong"> Code Integration & Code Deployment</div>
-            </div>
-        </div>
-
-        <!-- AWS -->
-        <div id="aws" class="chapter" style="display:none;">
-            <h2>AWS</h2>
-
-            <div class="question-card">
-                <p>3. What is EC2?</p>
-                <div class="option"><input type="radio" name="q3" value="Correct"> Virtual Server</div>
-                <div class="option"><input type="radio" name="q3" value="Wrong"> Database</div>
-            </div>
-
-            <div class="question-card">
-                <p>4. S3 is used for?</p>
-                <div class="option"><input type="radio" name="q4" value="Correct"> Storage</div>
-                <div class="option"><input type="radio" name="q4" value="Wrong"> Compute</div>
-            </div>
-        </div>
-
-        <!-- Docker -->
-        <div id="docker" class="chapter" style="display:none;">
-            <h2>Docker</h2>
-
-            <div class="question-card">
-                <p>5. Docker is used for?</p>
-                <div class="option"><input type="radio" name="q5" value="Correct"> Containerization</div>
-                <div class="option"><input type="radio" name="q5" value="Wrong"> Virtualization</div>
-            </div>
-
-            <div class="question-card">
-                <p>6. Docker image is?</p>
-                <div class="option"><input type="radio" name="q6" value="Correct"> Blueprint</div>
-                <div class="option"><input type="radio" name="q6" value="Wrong"> Running container</div>
-            </div>
-        </div>
-
-        <!-- Kubernetes -->
-        <div id="k8s" class="chapter" style="display:none;">
-            <h2>Kubernetes</h2>
-
-            <div class="question-card">
-                <p>7. Pod is?</p>
-                <div class="option"><input type="radio" name="q7" value="Correct"> Smallest unit</div>
-                <div class="option"><input type="radio" name="q7" value="Wrong"> Cluster</div>
-            </div>
-
-            <div class="question-card">
-                <p>8. Service in K8s is?</p>
-                <div class="option"><input type="radio" name="q8" value="Correct"> Networking abstraction</div>
-                <div class="option"><input type="radio" name="q8" value="Wrong"> Storage</div>
-            </div>
-        </div>
-
-        <br>
-        <button class="submit-btn" type="submit">Submit Assessment</button>
-
-        </form>
-
-    </div>
-
+<div id="result"></div>
 </div>
 
 <script>
-    // Default load first chapter
-    showChapter('devops');
+
+const questions = [
+
+/* ---------------- CORE DEVOPS ---------------- */
+{
+q:"What is DevOps primarily focused on?",
+o:["Database","Collaboration + Automation","Networking","UI Design"],
+a:1,
+e:"DevOps combines development and operations using automation, CI/CD, and collaboration."
+},
+{
+q:"Main goal of DevOps?",
+o:["Slow releases","Frequent reliable delivery","Manual deployment","No testing"],
+a:1,
+e:"DevOps improves delivery speed with reliability."
+},
+{
+q:"What is CI?",
+o:["Continuous Integration","Code Index","Cloud Infra","Container Init"],
+a:0,
+e:"CI merges code frequently and runs automated tests."
+},
+{
+q:"What is CD?",
+o:["Continuous Delivery/Deployment","Code Deploy","Cloud Dev","Control Data"],
+a:0,
+e:"CD automates release process."
+},
+
+/* ---------------- AWS ---------------- */
+{
+q:"What does EC2 provide?",
+o:["Containers","VMs","Database","Serverless"],
+a:1,
+e:"EC2 provides virtual machines."
+},
+{
+q:"What is S3?",
+o:["Compute","Storage","Network","Container"],
+a:1,
+e:"S3 is object storage."
+},
+{
+q:"Auto Scaling purpose?",
+o:["Reduce cost","Maintain capacity","Logging","Security"],
+a:1,
+e:"Auto scaling adjusts instances based on load."
+},
+{
+q:"IAM role is?",
+o:["Permanent user","Temporary access","Database","Firewall"],
+a:1,
+e:"Roles give temporary access to services."
+},
+
+/* ---------------- DOCKER ---------------- */
+{
+q:"Docker image is?",
+o:["Running app","Blueprint","Server","Script"],
+a:1,
+e:"Image is a template."
+},
+{
+q:"Docker container is?",
+o:["Blueprint","Running instance","File","Code"],
+a:1,
+e:"Container runs the image."
+},
+{
+q:"CMD vs ENTRYPOINT?",
+o:["Same","CMD overrideable","ENTRY fixed","Both B & C"],
+a:3,
+e:"ENTRYPOINT fixed, CMD default."
+},
+
+/* ---------------- KUBERNETES ---------------- */
+{
+q:"Pod is?",
+o:["Cluster","Smallest deployable unit","Node","Service"],
+a:1,
+e:"Pod is smallest unit in Kubernetes."
+},
+{
+q:"Service in Kubernetes?",
+o:["Storage","Expose pods","Build","Test"],
+a:1,
+e:"Service exposes pods."
+},
+
+/* ---------------- TERRAFORM ---------------- */
+{
+q:"Terraform is?",
+o:["CI tool","IaC tool","Monitoring","DB"],
+a:1,
+e:"Terraform provisions infra via code."
+},
+{
+q:"Terraform state?",
+o:["Logs","Mapping infra","Script","Plan"],
+a:1,
+e:"State tracks infra."
+},
+
+/* ---------------- GIT ---------------- */
+{
+q:"Git rebase?",
+o:["Merge history","Linear history","Delete code","Push"],
+a:1,
+e:"Rebase creates linear history."
+},
+{
+q:"Cherry pick?",
+o:["Merge all","Select commit","Delete","Clone"],
+a:1,
+e:"Applies specific commit."
+},
+
+/* ---------------- GITHUB ACTIONS ---------------- */
+{
+q:"GitHub Actions used for?",
+o:["Storage","CI/CD","Compute","Security"],
+a:1,
+e:"Automates pipelines."
+},
+{
+q:"Secrets usage?",
+o:["Hardcode","GitHub Secrets","Env file public","None"],
+a:1,
+e:"Secrets stored securely."
+},
+
+/* ---------------- ANSIBLE ---------------- */
+{
+q:"Ansible is?",
+o:["Agentless","Agent-based","DB","UI"],
+a:0,
+e:"Uses SSH, no agent."
+},
+
+/* ---------------- HELM ---------------- */
+{
+q:"Helm chart?",
+o:["Dockerfile","YAML templates","Script","Binary"],
+a:1,
+e:"Helm charts package k8s apps."
+},
+
+{
+"q":"What is the primary goal of DevOps?",
+"o":["Increase manual work","Faster and reliable delivery","Reduce collaboration","Eliminate testing"],
+"a":1,
+"e":"DevOps focuses on faster, reliable, and automated software delivery."
+},
+{
+"q":"Which practice is core to DevOps?",
+"o":["Waterfall","CI/CD","Manual deployment","Big Bang releases"],
+"a":1,
+"e":"CI/CD enables continuous integration and delivery."
+},
+{
+"q":"Continuous Integration means?",
+"o":["Deploy daily","Merge code frequently","Manual testing","Ignore bugs"],
+"a":1,
+"e":"CI ensures frequent code merges with automated testing."
+},
+{
+"q":"Continuous Delivery ensures?",
+"o":["Manual deploy","Code always deployable","No testing","Slow release"],
+"a":1,
+"e":"CD ensures code is always ready for production."
+},
+{
+"q":"Continuous Deployment means?",
+"o":["Manual approval","Auto production release","Weekly release","Testing only"],
+"a":1,
+"e":"Every successful build is automatically deployed."
+},
+{
+"q":"What is Infrastructure as Code?",
+"o":["Manual infra","Scripted provisioning","Monitoring","UI design"],
+"a":1,
+"e":"IaC uses code to provision infrastructure."
+},
+{
+"q":"Which tool is used for IaC?",
+"o":["Docker","Terraform","Jenkins","Git"],
+"a":1,
+"e":"Terraform is widely used for IaC."
+},
+{
+"q":"Terraform state file stores?",
+"o":["Logs","Infra mapping","Code","Secrets"],
+"a":1,
+"e":"State maps real infra with config."
+},
+{
+"q":"Terraform init does?",
+"o":["Deploy infra","Initialize project","Destroy infra","Run tests"],
+"a":1,
+"e":"Initializes backend and plugins."
+},
+{
+"q":"Terraform plan does?",
+"o":["Execute changes","Preview changes","Delete infra","Backup"],
+"a":1,
+"e":"Shows execution plan before apply."
+},
+
+{
+"q":"Docker is used for?",
+"o":["VMs","Containerization","Monitoring","Networking"],
+"a":1,
+"e":"Docker packages apps in containers."
+},
+{
+"q":"Docker image is?",
+"o":["Running instance","Blueprint","Server","Script"],
+"a":1,
+"e":"Image is a template for container."
+},
+{
+"q":"Docker container is?",
+"o":["Template","Running instance","Script","DB"],
+"a":1,
+"e":"Container is a running image."
+},
+{
+"q":"CMD instruction is?",
+"o":["Fixed command","Default command","Delete command","Copy file"],
+"a":1,
+"e":"CMD sets default execution."
+},
+{
+"q":"ENTRYPOINT is?",
+"o":["Optional","Fixed execution","Temp file","Env var"],
+"a":1,
+"e":"ENTRYPOINT cannot be overridden easily."
+},
+
+{
+"q":"Kubernetes is?",
+"o":["Database","Container orchestration","CI tool","Cloud provider"],
+"a":1,
+"e":"Kubernetes manages container workloads."
+},
+{
+"q":"Pod is?",
+"o":["Cluster","Smallest unit","Service","Node"],
+"a":1,
+"e":"Pod is smallest deployable unit."
+},
+{
+"q":"Service in Kubernetes?",
+"o":["Storage","Expose pods","Code","Build"],
+"a":1,
+"e":"Service exposes pods."
+},
+{
+"q":"ReplicaSet ensures?",
+"o":["Storage","Desired pods","CI","Logs"],
+"a":1,
+"e":"Maintains required pod count."
+},
+{
+"q":"Helm is?",
+"o":["CI tool","K8s package manager","Cloud","DB"],
+"a":1,
+"e":"Helm simplifies Kubernetes deployments."
+},
+
+{
+"q":"AWS EC2 provides?",
+"o":["Storage","VMs","Serverless","DB"],
+"a":1,
+"e":"EC2 offers virtual machines."
+},
+{
+"q":"AWS S3 is?",
+"o":["Compute","Object storage","Network","DB"],
+"a":1,
+"e":"S3 stores objects."
+},
+{
+"q":"AWS Lambda is?",
+"o":["VM","Serverless compute","Storage","CI tool"],
+"a":1,
+"e":"Lambda runs code without servers."
+},
+{
+"q":"Auto Scaling does?",
+"o":["Backup","Scale instances","Monitor","Encrypt"],
+"a":1,
+"e":"Adjusts capacity automatically."
+},
+{
+"q":"IAM role is?",
+"o":["Permanent user","Temporary access","DB","Firewall"],
+"a":1,
+"e":"Roles grant temporary permissions."
+},
+
+{
+"q":"Git is?",
+"o":["CI tool","Version control","Cloud","DB"],
+"a":1,
+"e":"Git tracks code changes."
+},
+{
+"q":"Git merge does?",
+"o":["Delete code","Combine branches","Rebase","Clone"],
+"a":1,
+"e":"Merge combines histories."
+},
+{
+"q":"Git rebase does?",
+"o":["Delete","Linear history","Merge","Clone"],
+"a":1,
+"e":"Rebase creates linear commit history."
+},
+{
+"q":"Git stash is?",
+"o":["Delete","Temporary save","Push","Pull"],
+"a":1,
+"e":"Stash saves changes temporarily."
+},
+{
+"q":"Cherry-pick is?",
+"o":["Merge all","Select commit","Delete","Clone"],
+"a":1,
+"e":"Applies specific commit."
+},
+
+{
+"q":"CI/CD tool?",
+"o":["Docker","GitHub Actions","K8s","Terraform"],
+"a":1,
+"e":"GitHub Actions automates pipelines."
+},
+{
+"q":"Pipeline trigger?",
+"o":["Manual only","Event-based","DB","Storage"],
+"a":1,
+"e":"Triggered by events like push."
+},
+{
+"q":"Secrets in CI?",
+"o":["Hardcode","Secure store","Public file","None"],
+"a":1,
+"e":"Use secret managers."
+},
+{
+"q":"Runner is?",
+"o":["Server","Executes jobs","DB","UI"],
+"a":1,
+"e":"Runner executes pipeline steps."
+},
+
+{
+"q":"Ansible is?",
+"o":["Agent-based","Agentless","DB","CI"],
+"a":1,
+"e":"Uses SSH, no agent needed."
+},
+{
+"q":"Playbook is?",
+"o":["Code","YAML tasks","Binary","Script"],
+"a":1,
+"e":"Defines automation steps."
+},
+{
+"q":"Inventory file?",
+"o":["Logs","Hosts list","Secrets","Code"],
+"a":1,
+"e":"Defines managed nodes."
+},
+
+{
+"q":"Monitoring tool?",
+"o":["Docker","Prometheus","Git","Helm"],
+"a":1,
+"e":"Prometheus collects metrics."
+},
+{
+"q":"Grafana is?",
+"o":["DB","Visualization","CI","OS"],
+"a":1,
+"e":"Grafana visualizes metrics."
+},
+{
+"q":"Logging tool?",
+"o":["ELK","Docker","Git","Helm"],
+"a":0,
+"e":"ELK stack handles logs."
+},
+
+{
+"q":"Blue-green deployment?",
+"o":["Delete old","Two env switch","Rollback","Manual"],
+"a":1,
+"e":"Switch traffic between envs."
+},
+{
+"q":"Canary deployment?",
+"o":["Full deploy","Partial rollout","Delete","Manual"],
+"a":1,
+"e":"Gradual rollout to users."
+},
+
+{
+"q":"Load balancer?",
+"o":["Store","Distribute traffic","Compute","Encrypt"],
+"a":1,
+"e":"Distributes traffic across servers."
+},
+{
+"q":"Reverse proxy?",
+"o":["Client side","Server side","DB","CI"],
+"a":1,
+"e":"Handles backend requests."
+},
+
+{
+"q":"SSL provides?",
+"o":["Speed","Encryption","Storage","Compute"],
+"a":1,
+"e":"Encrypts communication."
+},
+{
+"q":"HTTP vs HTTPS?",
+"o":["Same","HTTPS secure","HTTP faster","None"],
+"a":1,
+"e":"HTTPS adds SSL."
+},
+
+{
+"q":"Container advantage?",
+"o":["Heavy","Lightweight","Slow","Manual"],
+"a":1,
+"e":"Containers are lightweight."
+},
+{
+"q":"Microservices?",
+"o":["Monolith","Small services","DB","CI"],
+"a":1,
+"e":"Break apps into services."
+},
+
+{
+"q":"Observability includes?",
+"o":["Logs","Metrics","Tracing","All"],
+"a":3,
+"e":"All three are required."
+},
+{
+"q":"SRE focuses on?",
+"o":["Coding","Reliability","UI","DB"],
+"a":1,
+"e":"Ensures system reliability."
+},
+
+{
+"q":"Scaling types?",
+"o":["Vertical","Horizontal","Both","None"],
+"a":2,
+"e":"Both scaling methods used."
+},
+
+{
+"q":"Zero downtime deploy?",
+"o":["Stop app","Rolling update","Delete","Manual"],
+"a":1,
+"e":"Rolling updates avoid downtime."
+}
+]
+
+const quiz = document.getElementById("quiz");
+
+questions.forEach((q, i)=>{
+  const div = document.createElement("div");
+  div.className="card";
+
+  div.innerHTML = `
+    <b>Q${i+1}. ${q.q}</b>
+    ${q.o.map((opt,j)=>`
+      <label class="option">
+        <input type="radio" name="q${i}" value="${j}"> ${opt}
+      </label>`).join("")}
+    <div class="explanation" id="exp${i}"></div>
+  `;
+
+  quiz.appendChild(div);
+});
+
+function submitQuiz(){
+  let score=0;
+
+  questions.forEach((q,i)=>{
+    const selected = document.querySelector(`input[name=q${i}]:checked`);
+    const opts = document.getElementsByName(`q${i}`);
+
+    opts.forEach((opt,j)=>{
+      const parent = opt.parentElement;
+
+      if(j===q.a) parent.classList.add("correct");
+      if(selected && selected.value==j && j!==q.a) parent.classList.add("wrong");
+    });
+
+    if(selected && selected.value==q.a) score++;
+
+    const exp = document.getElementById("exp"+i);
+    exp.style.display="block";
+    exp.innerHTML = "<b>Explanation:</b> "+q.e;
+  });
+
+  let percent = (score/questions.length)*100;
+
+  document.getElementById("result").innerHTML = `
+    <div class="card">
+      🎯 Score: ${score}/${questions.length} (${percent.toFixed(1)}%)
+      <br><br>
+      ${percent>80?"🔥 Interview Ready":
+        percent>60?"⚠️ Improve":
+        "❌ Need Practice"}
+    </div>
+  `;
+}
+
 </script>
 
 </body>
