@@ -33,3 +33,11 @@ User → Flask App → Docker → Kubernetes → GitHub Actions (CI/CD)
 ---
 
 ## 📁 Project Structure
+---
+## Application Screenshots
+<img width="1633" height="847" alt="image" src="https://github.com/user-attachments/assets/c461868b-66f6-446f-a493-872627b14b44" />
+#
+<img width="1119" height="662" alt="image" src="https://github.com/user-attachments/assets/6bd70538-69eb-4ceb-8588-c8b876ed0e3b" />
+#
+<img width="1048" height="197" alt="image" src="https://github.com/user-attachments/assets/2504714d-315c-47ce-ba5f-0b1802952b9e" />
+#
