@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DevOps Assessment Platform</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    margin: 0;
+}
+
+header {
+    background: #1e293b;
+    padding: 15px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #020617;
+    padding: 20px;
+    height: 100vh;
+}
+
+.sidebar button {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #1e293b;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.sidebar button:hover {
+    background: #3b82f6;
+}
+
+/* Content */
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+.question-card {
+    background: #1e293b;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.option {
+    margin: 8px 0;
+}
+
+button.submit-btn {
+    background: #22c55e;
+    border: none;
+    padding: 12px 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.progress {
+    margin-bottom: 15px;
+}
+
+</style>
+
+<script>
+function showChapter(chapter) {
+    let sections = document.querySelectorAll(".chapter");
+    sections.forEach(sec => sec.style.display = "none");
+
+    document.getElementById(chapter).style.display = "block";
+}
+</script>
+
+</head>
+
+<body>
+
+<header>🚀 DevOps Assessment Platform</header>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>Chapters</h3>
+        <button onclick="showChapter('devops')">DevOps</button>
+        <button onclick="showChapter('aws')">AWS</button>
+        <button onclick="showChapter('docker')">Docker</button>
+        <button onclick="showChapter('k8s')">Kubernetes</button>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+
+        <form method="POST">
+
+        <!-- DevOps -->
+        <div id="devops" class="chapter">
+            <h2>DevOps</h2>
+
+            <div class="question-card">
+                <p>1. What is DevOps?</p>
+                <div class="option"><input type="radio" name="q1" value="Culture"> Culture</div>
+                <div class="option"><input type="radio" name="q1" value="Tool"> Tool</div>
+                <div class="option"><input type="radio" name="q1" value="Language"> Language</div>
+            </div>
+
+            <div class="question-card">
+                <p>2. CI/CD stands for?</p>
+                <div class="option"><input type="radio" name="q2" value="Correct"> Continuous Integration & Continuous Deployment</div>
+                <div class="option"><input type="radio" name="q2" value="Wrong"> Code Integration & Code Deployment</div>
+            </div>
+        </div>
+
+        <!-- AWS -->
+        <div id="aws" class="chapter" style="display:none;">
+            <h2>AWS</h2>
+
+            <div class="question-card">
+                <p>3. What is EC2?</p>
+                <div class="option"><input type="radio" name="q3" value="Correct"> Virtual Server</div>
+                <div class="option"><input type="radio" name="q3" value="Wrong"> Database</div>
+            </div>
+
+            <div class="question-card">
+                <p>4. S3 is used for?</p>
+                <div class="option"><input type="radio" name="q4" value="Correct"> Storage</div>
+                <div class="option"><input type="radio" name="q4" value="Wrong"> Compute</div>
+            </div>
+        </div>
+
+        <!-- Docker -->
+        <div id="docker" class="chapter" style="display:none;">
+            <h2>Docker</h2>
+
+            <div class="question-card">
+                <p>5. Docker is used for?</p>
+                <div class="option"><input type="radio" name="q5" value="Correct"> Containerization</div>
+                <div class="option"><input type="radio" name="q5" value="Wrong"> Virtualization</div>
+            </div>
+
+            <div class="question-card">
+                <p>6. Docker image is?</p>
+                <div class="option"><input type="radio" name="q6" value="Correct"> Blueprint</div>
+                <div class="option"><input type="radio" name="q6" value="Wrong"> Running container</div>
+            </div>
+        </div>
+
+        <!-- Kubernetes -->
+        <div id="k8s" class="chapter" style="display:none;">
+            <h2>Kubernetes</h2>
+
+            <div class="question-card">
+                <p>7. Pod is?</p>
+                <div class="option"><input type="radio" name="q7" value="Correct"> Smallest unit</div>
+                <div class="option"><input type="radio" name="q7" value="Wrong"> Cluster</div>
+            </div>
+
+            <div class="question-card">
+                <p>8. Service in K8s is?</p>
+                <div class="option"><input type="radio" name="q8" value="Correct"> Networking abstraction</div>
+                <div class="option"><input type="radio" name="q8" value="Wrong"> Storage</div>
+            </div>
+        </div>
+
+        <br>
+        <button class="submit-btn" type="submit">Submit Assessment</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+    // Default load first chapter
+    showChapter('devops');
+</script>
+
+</body>
+</html>

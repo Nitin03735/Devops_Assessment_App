@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: assessment-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: assessment
+  template:
+    metadata:
+      labels:
+        app: assessment
+    spec:
+      containers:
+      - name: assessment
+        image: your-dockerhub-username/assessment-app:latest
+        ports:
+        - containerPort: 80
